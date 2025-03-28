@@ -13,15 +13,19 @@ public class EditorDibujosGUI extends JFrame {
         }
     };
     JComboBox<String> comboTrazo = new JComboBox<>(new String[] { "Linea", "Rectangulo", "Circulo" });
-    JButton btnGuardar = new JButton("Guardar");
-    JButton btnCargar = new JButton("Cargar");
-    JButton btnBorrarUltimo = new JButton("Borrar Último");
+    JButton btnGuardar = new JButton();
+    JButton btnCargar = new JButton();
+    JButton btnBorrarUltimo = new JButton();
 
     public EditorDibujosGUI() {
         setTitle("Editor de Dibujos Vectoriales");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        btnGuardar.setIcon(createScaledIcon("/imagenes/Guardar.png", 32, 32)); // Imagen para el botón Guardar
+        btnCargar.setIcon(createScaledIcon("/imagenes/Cargar.png", 32, 32)); // Imagen para el botón Cargar
+        btnBorrarUltimo.setIcon(createScaledIcon("/imagenes/Borrar_ultimo.png", 32, 32)); // Imagen para el botón Borrar
 
         panelDibujo.setBackground(Color.WHITE);
         panelDibujo.addMouseListener(new MouseAdapter() {
@@ -48,6 +52,12 @@ public class EditorDibujosGUI extends JFrame {
         btnGuardar.addActionListener(e -> guardarDibujo());
         btnCargar.addActionListener(e -> cargarDibujo());
         btnBorrarUltimo.addActionListener(e -> borrarUltimoTrazo());
+    }
+
+    private ImageIcon createScaledIcon(String resourcePath, int width, int height) {
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource(resourcePath));
+        Image scaledImage = originalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(scaledImage);
     }
 
     private void agregarTrazo(Point punto) {

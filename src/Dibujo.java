@@ -40,7 +40,7 @@ public class Dibujo {
     public void guardarDibujo(String nombreArchivo) {
         try (PrintWriter out = new PrintWriter(nombreArchivo)) {
             for (Trazo trazo : trazos) {
-                out.println(trazo.toString()); // Asumiendo que cada Trazo tiene un método toString() adecuado
+                out.println(trazo.toString());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class Dibujo {
             String linea;
             trazos.clear();
             while ((linea = in.readLine()) != null) {
-                Trazo trazo = Trazo.fromString(linea); // Asumiendo que hay un método estático fromString() en Trazo
+                Trazo trazo = Trazo.fromString(linea);
                 trazos.add(trazo);
             }
         } catch (IOException e) {
